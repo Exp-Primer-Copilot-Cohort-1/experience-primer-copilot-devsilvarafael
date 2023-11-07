@@ -1,11 +1,27 @@
+// Create Web Server for Comments
 
-import { createServer } from 'http';
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
 
-const server = createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello, world!');
+var comments = [];
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.get('/', function(req, res) {
+	res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(3000, () => {
-  console.log('Server is listening on port 3000');
+app.get('/comments', function(req, res) {
+	res.json(comments);
+});
+
+app.post('/comments', function(req, res) {
+	comments.push(req.body);
+	res.json(comments);
+});
+
+app.listen(3000, function() {
+	console.log('Server running at http://localhost:3000');
 });
