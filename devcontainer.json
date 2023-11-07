@@ -1,0 +1,11 @@
+{
+    // Name this configuration
+    "name": "I'm the force!",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.copilot"
+            ]
+        }
+    }
+}
